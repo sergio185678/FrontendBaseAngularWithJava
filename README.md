@@ -4,6 +4,8 @@ Este proyecto es un conjunto completo de herramientas esenciales para desarrolla
 
 ![image](https://github.com/sergio185678/FrontendBaseAngularWithJava/assets/67492035/8015eda4-de58-431c-8066-db3fbc656c60)
 
+Link del repositorio del backend: https://github.com/sergio185678/MyProjectJavaSpringBoot
+
 ## Estructura del Proyecto
 
 - **Components:** Contiene todos los componentes que representan cada sección de la aplicación.
