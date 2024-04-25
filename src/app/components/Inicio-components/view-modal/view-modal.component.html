@@ -1,0 +1,65 @@
+<div class="modal">
+  <div class="modal-contenido">
+
+    <div class="contorno">
+      
+      @if (usuario!=undefined && verlistadocs==false) {
+
+        <div class="mb-3">
+          <label for="userid" class="form-label">UserId</label>
+          <input type="text" [value]="usuario.userId" class="form-control" readonly>
+        </div>
+  
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input type="text" [value]="usuario.nombreCompleto" class="form-control" readonly>
+        </div>
+  
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="text" [value]="usuario.correo" class="form-control" readonly>
+        </div>
+  
+        <div class="mb-3">
+          <label for="cargo" class="form-label">Cargo</label>
+          <input type="text" [value]="usuario.cargo?.nombre" class="form-control" readonly>
+        </div>
+  
+        <div id="botones">
+          <button type="button" class="btn btn-secondary" (click)="cerrar()">Cerrar</button>
+          <button type="button" class="btn btn-info" (click)="verdocumentos()">Ver Docs</button>
+          <button type="button" class="btn btn-success" (click)="download()"><i class="fa-solid fa-file-arrow-down"></i></button>
+        </div>
+        
+      }
+
+      @if (verlistadocs) {
+      
+        <h3>Documentos</h3>
+        <div>
+          @if (documentos.length==0) {
+            <p>No se encontro documentos</p>
+          }
+          @for (documento of documentos; track $index) {
+            <div class="documento">
+              <p>{{documento.tipo}}</p>
+            
+              <div class="iconos-derecha">
+                <i class="fa-solid fa-download" (click)="dowloadPdf(documento)"></i>
+              </div>
+
+            </div>
+          }
+        </div>
+        <div id="botones">
+          <button type="button" class="btn btn-secondary" (click)="cerrar()">Cerrar</button>
+          <button type="button" class="btn btn-info" (click)="verinformacion()">Ver Info</button>
+        </div>
+
+      }
+
+    </div>
+      
+  </div>
+
+</div>

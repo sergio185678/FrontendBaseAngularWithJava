@@ -1,0 +1,110 @@
+<div class="modal">
+
+  <div class="modal-contenido">
+
+    <div>
+      <div class="alert alert-success alert-dismissible fade" [ngClass]="{'show':status=='success'}">
+        <strong>Success!</strong> {{txt}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+    </div>
+
+    <div class="contorno">
+      @if (verlistadocs==false){
+  
+        <!-- FORMULARIO -->
+        <form [formGroup]="miFormulario" (ngSubmit)="enviarFormulario()">
+          
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" formControlName="nombre" id="nombre" class="form-control">
+            @if (miFormulario.get('nombre')!.invalid && (miFormulario.get('nombre')!.dirty || miFormulario.get('nombre')!.touched)) {
+              @if (miFormulario.get('nombre')!.hasError('required')) {
+                <div class="form-text">El nombre es requerido.</div>
+              }
+            }
+          </div>
+    
+          <div class="mb-3">
+            <label for="cargo" class="form-label">Cargo</label>
+            <br>
+            <div class="select-wrapper">
+              <select id="cargo" formControlName="cargoid" class="form-control">
+                @for (cargo of opcionesCargos; track $index) {
+                  <option [value]="cargo.cargoId?.toString()" [selected]="cargo.cargoId == miFormulario.get('cargoid')!.value">{{ cargo.nombre }}</option>
+                }
+                
+              </select>
+              <span class="arrow-down"></span>
+            </div>
+          </div>
+    
+          <div id="botones">
+            <button type="button" class="btn btn-secondary" (click)="cerrar()">Cerrar</button>
+            <button type="button" class="btn btn-info" (click)="verDocumentos()">Ver Docs</button>
+            <button type="submit" [disabled]="!miFormulario.valid" class="btn btn-primary">Actualizar</button>
+          </div>
+          
+        </form>
+  
+      }
+  
+      @if (verlistadocs) {
+  
+        <h3>Documentos</h3>
+        <button class="btn btn-success" id="agregar" (click)="abrirSeccionAgregar()">+ Agregar</button>
+
+        @if (seccionagregar) {
+          <div id="agregando_archivo">
+            <form (submit)="submitFile($event)" enctype="multipart/form-data">
+              <p>Tipo de archivo</p>
+              <input type="text" [(ngModel)]="tipo_archivo" name="tipo_archivo" placeholder="Escriba el tipo de archivo">
+              <input type="file" name="file" (change)="onFileSelected($event)">
+              <button type="submit" class="btn btn-primary" [disabled]="tipo_archivo === '' || selectedFile === undefined">Subir Archivo <i class="fa-solid fa-upload"></i></button>
+            </form>
+          </div>
+        }
+
+        <div>
+          @if (documentos.length==0) {
+            <p>No se encontro documentos</p>
+          }
+          @for (documento of documentos; track $index) {
+            <div class="documento">
+              <p>{{documento.tipo}}</p>
+    
+              <div class="iconos-derecha">
+                <i class="fa-solid fa-trash" (click)="abrirModalEliminar(documento.documentoId)"></i>
+              </div>
+              
+            </div>
+          }
+        </div>
+        <div id="botones">
+          <button type="button" class="btn btn-secondary" (click)="cerrar()">Cerrar</button>
+          <button type="button" class="btn btn-info" (click)="verInformacion()">Ver Info</button>
+        </div>
+      }
+    </div>
+
+    @if (modalEliminar){
+      <div class="modal">
+        <div class="modal-contenido">
+          <div>
+            <div class="alert alert-success alert-dismissible fade" [ngClass]="{'show':status=='success'}">
+              <strong>Success!</strong> Se elimino correctamente
+              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+          </div>
+          <p>¿Estas seguro qe deseas eliminar este usuario?</p>
+          <div id="botones_modal">
+            <button type="button" class="btn btn-secondary" (click)="cerrarModalEliminar()">Cerrar</button>
+            <button type="button" class="btn btn-danger" (click)="eliminar()">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    }
+
+  </div>
+
+</div>

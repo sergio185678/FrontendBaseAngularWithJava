@@ -1,0 +1,23 @@
+<div class="containerr">
+
+    <div class="subcontainer">
+
+        <div class="part_izquierda" >
+            <h1 [routerLink]="['/home']" style="cursor: pointer;">Inicio</h1>
+            <h1>|</h1>
+            <h1 [routerLink]="['/cargos']" style="cursor: pointer;">Cargos</h1>
+        </div>
+
+        <div class="part_derecha">
+            <div class="dropdown">
+                <img id="imageDropdown" src="assets\logo.png" alt="">
+                <div class="dropdown-content" id="imageDropdownContent">
+                    <a [routerLink]="['/perfil']">Perfil</a>
+                    <a (click)="logout()">Cerrar sesión</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+</div>

@@ -1,0 +1,13 @@
+<app-navbar></app-navbar>
+
+<div id="cargos">
+
+    <h3>Lista de Cargos</h3><br>
+
+    <ul class="list-group">
+        @for (cargo of cargos; track $index) {
+            <li class="list-group-item" (click)="cargoclick(cargo.cargoId)">{{cargo.nombre}}</li>
+        }
+    </ul>
+
+</div>

@@ -1,0 +1,55 @@
+<!-- ALERTAS -->
+<div class="m-4">
+
+  <div class="alert alert-success alert-dismissible fade" [ngClass]="{'show':status=='success'}">
+    <strong>Success!</strong> {{txt}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  </div>
+
+  <div class="alert alert-danger alert-dismissible fade" [ngClass]="{'show':status=='error'}">
+    <strong>Error!</strong> {{txt}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  </div>
+
+</div>
+
+<!-- FORMULARIO -->
+<h2>Iniciar Sesión</h2>
+
+<form [formGroup]="miFormulario" (ngSubmit)="enviarFormulario()" id="formulario">
+  
+  <div class="mb-3">
+    
+    <label for="email" class="form-label">Email</label>
+    <input type="email" formControlName="email" id="email" class="form-control">
+
+    @if (miFormulario.get('email')!.invalid && (miFormulario.get('email')!.dirty || miFormulario.get('email')!.touched)) {
+      @if (miFormulario.get('email')!.hasError('required')) {
+        <div class="form-text">El email es requerido.</div>
+      }
+      @if (miFormulario.get('email')!.hasError('email')) {
+        <div class="form-text">El email debe tener un formato válido.</div>
+      }
+    }
+    
+  </div>
+
+  <div class="mb-3">
+
+    <label for="contraseña" class="form-label">Contraseña</label>
+    <input type="text" formControlName="contraseña" id="contraseña" class="form-control">
+
+    @if (miFormulario.get('contraseña')!.invalid && (miFormulario.get('contraseña')!.dirty || miFormulario.get('contraseña')!.touched)) {
+      @if (miFormulario.get('contraseña')!.hasError('required')) {
+        <div class="form-text">La contraseña es requerido.</div>
+      }
+    }
+    
+  </div>
+
+  <div id="botones">
+    <button type="button" class="btn btn-secondary" [routerLink]="['/register']"> Ir a Registrarse</button>
+    <button type="submit" [disabled]="!miFormulario.valid" class="btn btn-primary">Iniciar Sesión</button>
+  </div>
+  
+</form>

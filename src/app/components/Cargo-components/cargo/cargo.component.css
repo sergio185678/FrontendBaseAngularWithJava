@@ -1,0 +1,24 @@
+.table{
+  text-align: center;
+  margin-bottom: 40px;
+}
+#cargo{
+  width: 70%;
+  margin: 0 auto;
+}
+h3{
+  text-align: center;
+  text-decoration: underline;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+@media screen and (max-width: 1024px) {
+  #cargo{
+    width: 80%;
+  }
+}
+@media screen and (max-width: 768px) {
+  #cargo{
+    width: 90%;
+  }
+}

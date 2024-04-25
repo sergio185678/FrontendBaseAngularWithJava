@@ -1,0 +1,9 @@
+<!-- Link: https://loading.io/css/  , sino mirar el video de interceptor de DOMINICODE -->
+<!-- El spinner se puso en el html padre de todos en el app.component.html -->
+@if (isLoading$|async) {
+    <div class="overlay">
+        <div class="lds-ring">
+            <div></div><div></div><div></div><div></div>
+        </div>
+    </div>
+}

@@ -1,0 +1,131 @@
+<app-navbar></app-navbar>
+
+<div id="home">
+
+    <div id="titulos">
+      <h2>Hola, {{nombre_usuario}} ({{cargo_usuario}})</h2><br>
+      <h3>Tabla de Usuarios</h3><br>
+    </div>
+
+    <div id="botones">
+      <button type="button" class="btn btn-danger" (click)="generar_pdf()">Generar PDF</button>
+      <button type="button" class="btn btn-success" (click)="exportar_excel()">Exportar a Excel</button>
+    </div>
+
+    <!-- PARTE SUPERIOR DE LA TABLA -->
+    <div id="tabla_sup">
+      <div id="sup_izquierda">
+        <p>Show </p>
+        <select [(ngModel)]="sizeactual"(change)="cambiarsize()">
+          <option value=5>5</option>
+          <option value=10>10</option>
+          <option value=15>15</option>
+          <option value=20>20</option>
+        </select>
+        <p>Rows </p>
+      </div>
+      <div id="sup_dercha">
+        <input type="text" [(ngModel)]="searchTerm" (input)="onSearchInput()" placeholder="Search">
+      </div>
+    </div>
+
+    <!-- TABLA -->
+    <table class="table table-bordered table-light">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Usuario Id</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Email</th>
+          <th scope="col">Cargo</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @if (arrayUsuario.length==0) {
+          <tr>
+              <td colspan="5">No se encontro usuarios</td>
+          </tr>
+        }
+        @for (usario of arrayUsuario; track $index) {
+          <tr>
+            <th scope="row">{{($index+1)+(sizeactual*(pagina_actual-1))}}</th>
+            <td>{{usario.userId}}</td>
+            <td>{{usario.nombreCompleto}}</td>
+            <td>{{usario.correo}}</td>
+            <td>{{usario.cargo?.nombre}}</td>
+            <td id="acciones">
+              <div id="sub-contenedor">
+                <i class="fa-solid fa-eye" (click)="visualizar(usario.userId)"></i>
+                @if (cargo_usuario=="Administrador") {
+                  <i class="fa-solid fa-user-pen" (click)="editar(usario.userId)"></i>
+                  <i class="fa-solid fa-trash" (click)="abrirmodaleliminar(usario.userId)"></i>
+                }
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+    <!-- PARTE INFERIOR DE LA TABLA -->
+    <div id="tabla_inf">
+
+      <div class="inf_izquierda">
+        Showing {{elementostotales===0?0:((pagina_actual-1)*sizeactual)+1}} to {{sizzeinferior}} of {{elementostotales}} entries
+      </div>
+
+      <div class="inf_derecha">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" aria-label="Previous" (click)="anterior()">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            @for (page of obtenerPaginas(); track $index) {
+              <li class="page-item" [class.active]="pagina_actual === page">
+                <a class="page-link" (click)="irAPagina(page)">{{ page }}</a>
+              </li>
+            }
+            <li class="page-item">
+              <a class="page-link" aria-label="Next" (click)="siguiente()">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+    </div>
+
+    <!-- MODAL VISUALIZAR -->
+    @if (modalVisualizar) {
+      <app-view-modal [idusuario]="idUsuario" (cerrarModal)="cerrarModal()" ></app-view-modal>
+    }
+
+    <!-- MODAL EDITAR -->
+    @if (modalEditar) {
+      <app-edit-modal [idusuario]="idUsuario" (cerrarModal)="cerrarModal()" ></app-edit-modal>
+    }
+
+    <!-- MODAL ELIMINAR -->
+    @if (modalEliminar){
+      <div class="modal">
+        <div class="modal-contenido">
+          <div>
+            <div class="alert alert-success alert-dismissible fade" [ngClass]="{'show':status=='success'}">
+              <strong>Success!</strong> Se elimino correctamente
+              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+          </div>
+          <p>¿Estas seguro qe deseas eliminar este usuario?</p>
+          <div id="botones_modal">
+            <button type="button" class="btn btn-secondary" (click)="cerrarModal()">Cerrar</button>
+            <button type="button" class="btn btn-danger" (click)="eliminar()">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    }
+    
+</div>

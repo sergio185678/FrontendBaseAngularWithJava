@@ -1,0 +1,18 @@
+.alert.show {
+    display: block;
+}
+.alert{
+    display: none;
+}
+#formulario{
+    padding: 20px;
+    border: 1px solid #8c9196;
+    width: 400px;
+    margin: 50px auto;
+}
+h2{
+    text-align: center;
+}
+#botones>button:last-child{
+    float: right;
+}
