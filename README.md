@@ -1,8 +1,12 @@
 # FrontendBaseAngularWithJava
 
-Este proyecto es un conjunto completo de herramientas esenciales para desarrollar aplicaciones en Angular. Encuentra la aplicación desplegada [aquí](https://frontendbaseangularwithjava.netlify.app/inicio).
+Este proyecto es un conjunto completo de herramientas esenciales para desarrollar aplicaciones en Angular. Encuentra la aplicación desplegada: https://frontendbaseangularwithjava.netlify.app/inicio .
 
 Nota: El backend desplegado actualmente no admite la gestión de archivos debido a las limitaciones de la capa gratuita de Render con Docker, así como a mi falta de experiencia en Docker. Además, debido a estas limitaciones, la inicialización del backend puede ser bastante lenta, lo que podría resultar en que la aplicación no cargue de inmediato. Si esto sucede, te recomiendo dejarla cargando; eventualmente, se inicializará y la aplicación funcionará correctamente.
+
+Usuario con cargo administrador: 
+  - Email: sergio1@gmail.com
+  - Contraseña: 123
 
 ![image](https://github.com/sergio185678/FrontendBaseAngularWithJava/assets/67492035/8015eda4-de58-431c-8066-db3fbc656c60)
 
